@@ -1,0 +1,6 @@
+framework module Pods_FirstAppWithAPI {
+  umbrella header "Pods-FirstAppWithAPI-umbrella.h"
+
+  export *
+  module * { export * }
+}
