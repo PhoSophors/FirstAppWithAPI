@@ -13,6 +13,7 @@
 		18253A882C3A235900E59002 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 18253A872C3A235900E59002 /* Base */; };
 		18253A8A2C3A235B00E59002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18253A892C3A235B00E59002 /* Assets.xcassets */; };
 		18253A8D2C3A235B00E59002 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 18253A8C2C3A235B00E59002 /* Base */; };
+		1842DCC72C3BDE1400DD6D95 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1842DCC62C3BDE1400DD6D95 /* EditProfileViewController.swift */; };
 		18F9189F2C3A24AE002DCFA4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9189E2C3A24AE002DCFA4 /* Constants.swift */; };
 		18F918A12C3A24B8002DCFA4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F918A02C3A24B8002DCFA4 /* Extensions.swift */; };
 		18F918A32C3A254F002DCFA4 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F918A22C3A254F002DCFA4 /* APIService.swift */; };
@@ -47,6 +48,7 @@
 		18253A892C3A235B00E59002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18253A8C2C3A235B00E59002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18253A8E2C3A235B00E59002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1842DCC62C3BDE1400DD6D95 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		18F9189E2C3A24AE002DCFA4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		18F918A02C3A24B8002DCFA4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		18F918A22C3A254F002DCFA4 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				18F918BB2C3A3F4A002DCFA4 /* HomeViewController.swift */,
 				18F918C42C3A4E91002DCFA4 /* ForgetPasswordViewController.swift */,
 				18F918C72C3ABBC2002DCFA4 /* RegisterVerifyOtpViewController.swift */,
+				1842DCC62C3BDE1400DD6D95 /* EditProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				18F918A72C3A267A002DCFA4 /* LoginViewController.swift in Sources */,
 				18F918A32C3A254F002DCFA4 /* APIService.swift in Sources */,
 				18F9189F2C3A24AE002DCFA4 /* Constants.swift in Sources */,
+				1842DCC72C3BDE1400DD6D95 /* EditProfileViewController.swift in Sources */,
 				18F918A52C3A255F002DCFA4 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

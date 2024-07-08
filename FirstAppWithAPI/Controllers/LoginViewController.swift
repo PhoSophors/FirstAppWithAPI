@@ -22,6 +22,10 @@ class LoginViewController: UIViewController {
         // Observe label tap notifications
         NotificationCenter.default.addObserver(self, selector: #selector(handleForgetPasswordLabelTap), name: .forgetPasswordLabelTapped, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRegisterLabelTap), name: .registerLabelTapped, object: nil)
+
+        // Observe keyboard notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     deinit {
@@ -44,17 +48,31 @@ class LoginViewController: UIViewController {
             return
         }
 
-        AuthManager.shared.login(email: email, password: password) { result in
+        AuthManager.shared.login(email: email, password: password) { [weak self] result in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success:
                     self.navigateToMainScreen()
                 case .failure(let error):
-                    self.showErrorMessage(message: "Login failed: \(error.localizedDescription)")
+                    var errorMessage = "Login failed: "
+                    switch error {
+                    case LoginError.emailNotFound:
+                        errorMessage += "Email not found. Please check your email."
+                    case LoginError.incorrectPassword:
+                        errorMessage += "Incorrect password. Please try again."
+                    case let LoginError.invalidCredentials(message):
+                        errorMessage += message
+                    default:
+                        errorMessage += "An unexpected error occurred. Please try again later."
+                    }
+                    self.showErrorMessage(message: errorMessage)
                 }
             }
         }
     }
+
+
 
     // Navigate to Main Screen on successful login
     private func navigateToMainScreen() {
@@ -81,4 +99,20 @@ class LoginViewController: UIViewController {
         let registerVC = RegisterViewController()
         navigationController?.pushViewController(registerVC, animated: true)
     }
+
+    // Keyboard notification handlers
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            loginView.scrollView.contentInset.bottom = keyboardHeight
+            loginView.scrollView.verticalScrollIndicatorInsets.bottom = keyboardHeight
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        loginView.scrollView.contentInset.bottom = 0
+        loginView.scrollView.verticalScrollIndicatorInsets.bottom = 0
+    }
+
 }

@@ -10,6 +10,8 @@ struct Constants {
         static let regsterOTP = "/auth/verify"
         static let loginEndpoint = "/auth/login"
         
+        static let userInfoEndpoint = "/users/me/info"
+        
 
         // Add other endpoints as needed
     }

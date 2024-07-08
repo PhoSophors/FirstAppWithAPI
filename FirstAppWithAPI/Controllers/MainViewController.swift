@@ -13,8 +13,8 @@ class MainViewController: UIViewController {
         // Create tab bar controller
         let tabBarController = UITabBarController()
         tabBarController.tabBar.barTintColor = .white
-        tabBarController.tabBar.tintColor = .white
-        tabBarController.tabBar.backgroundColor = ColorManager.shared.IVORY()
+        tabBarController.tabBar.tintColor = .systemBlue
+        tabBarController.tabBar.backgroundColor = .white
         
         // Create HomeViewController (embedded in a navigation controller)
         let homeVC = HomeViewController()

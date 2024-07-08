@@ -34,10 +34,23 @@ class RegisterView: UIView {
     
     let emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter Email"
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.placeholder = "Enter email"
+        textField.borderStyle = .none
+        textField.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+        textField.textColor = .black
+        textField.layer.cornerRadius = 15
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
+        textField.layer.shadowRadius = 5
         textField.keyboardType = .emailAddress
+        
+        // Capture self weakly to avoid retain cycle
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
+        
+        let placeholderView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = placeholderView
+        textField.leftViewMode = .always
         return textField
     }()
     
@@ -189,6 +202,14 @@ class RegisterView: UIView {
     @objc private func loginLabelTapped() {
         // Navigate to LoginViewController
         NotificationCenter.default.post(name: .loginLabelTapped, object: nil)
+    }
+    
+    @objc private func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.systemBlue.cgColor
+    }
+    
+    @objc private func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
     }
 }
 

@@ -5,18 +5,17 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileView: ProfileView = {
         let view = ProfileView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         view.delegate = self
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        title = "Profile"
+        view.backgroundColor = .systemGray6
         
         setupProfileView()
+        fetchUserInfo()
     }
     
     private func setupProfileView() {
@@ -27,7 +26,21 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    // Handle logout action
+    private func fetchUserInfo() {
+        // Fetch user info from your data source
+        AuthService.shared.fetchUserInfo { [weak self] result in
+            switch result {
+            case .success(let user):
+                DispatchQueue.main.async {
+                    self?.profileView.update(with: user)
+                }
+            case .failure(let error):
+                print("Failed to fetch user info: \(error)")
+                // Handle error display or retry logic if needed
+            }
+        }
+    }
+    
     private func handleLogout() {
         let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
         
@@ -54,6 +67,10 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: ProfileViewDelegate {
+    func profileViewDidTapEdit() {
+        // Handle edit button tap, possibly presenting an edit profile screen
+    }
+    
     func profileViewDidTapLogout() {
         handleLogout()
     }
