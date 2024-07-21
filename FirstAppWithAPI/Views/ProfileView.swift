@@ -97,7 +97,7 @@ class ProfileView: UIView {
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         
         // Add icon to the left
-        let leftIcon = UIImage(systemName: "person.crop.circle.fill")
+        let leftIcon = UIImage(systemName: "gearshape.fill")
         button.setImage(leftIcon, for: .normal)
         button.tintColor = .systemGray
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
@@ -197,8 +197,8 @@ class ProfileView: UIView {
         headerView.addSubview(emailLabel)
         headerView.addSubview(badgesStackView)
         addSubview(editProfileButton)
-        addSubview(profileSettingsButton)
         addSubview(changePasswordButton)
+        addSubview(profileSettingsButton)
         addSubview(logoutButton)
         
         // Setup constraints using SnapKit

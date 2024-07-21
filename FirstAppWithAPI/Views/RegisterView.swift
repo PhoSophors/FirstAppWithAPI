@@ -26,9 +26,22 @@ class RegisterView: UIView {
     let fullnameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Fullname"
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        textField.keyboardType = .emailAddress
+        textField.borderStyle = .none
+        textField.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+        textField.textColor = .black
+        textField.layer.cornerRadius = 15
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
+        textField.layer.shadowRadius = 5
+        
+        // Capture self weakly to avoid retain cycle
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
+        
+        let placeholderView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = placeholderView
+        textField.leftViewMode = .always
+        
         return textField
     }()
     
@@ -57,16 +70,64 @@ class RegisterView: UIView {
     let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Password"
-        textField.borderStyle = .roundedRect
+        textField.borderStyle = .none
         textField.isSecureTextEntry = true
+        textField.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+        textField.textColor = .black
+        textField.layer.cornerRadius = 15
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
+        textField.layer.shadowRadius = 5
+        
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
+        
+        let placeholderView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = placeholderView
+        textField.leftViewMode = .always
+        
+        let eyeButton = UIButton(type: .custom)
+        eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        eyeButton.setImage(UIImage(systemName: "eye"), for: .selected)
+        eyeButton.tintColor = .lightGray
+        eyeButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        eyeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        textField.rightView = eyeButton
+        textField.rightViewMode = .always
+        
         return textField
     }()
     
     let confirmPasswordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Confirm Password"
-        textField.borderStyle = .roundedRect
+        textField.placeholder = "Enter Password"
+        textField.borderStyle = .none
         textField.isSecureTextEntry = true
+        textField.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+        textField.textColor = .black
+        textField.layer.cornerRadius = 15
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
+        textField.layer.shadowRadius = 5
+        
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
+        
+        let placeholderView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = placeholderView
+        textField.leftViewMode = .always
+        
+        let eyeButton = UIButton(type: .custom)
+        eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        eyeButton.setImage(UIImage(systemName: "eye"), for: .selected)
+        eyeButton.tintColor = .lightGray
+        eyeButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        eyeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        textField.rightView = eyeButton
+        textField.rightViewMode = .always
+        
         return textField
     }()
     
@@ -79,13 +140,13 @@ class RegisterView: UIView {
         label.textAlignment = .center
         return label
     }()
-    
+
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Signup", for: .normal)
         button.backgroundColor = .systemBlue
         button.tintColor = .white
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 15
         return button
     }()
     
@@ -143,25 +204,25 @@ class RegisterView: UIView {
         fullnameTextField.snp.makeConstraints { make in
             make.top.equalTo(welcomeLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(fullnameTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         confirmPasswordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         forgetPasswordLabel.snp.makeConstraints { make in
@@ -172,7 +233,7 @@ class RegisterView: UIView {
         registerButton.snp.makeConstraints { make in
             make.top.equalTo(forgetPasswordLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         loginLabel.snp.makeConstraints { make in
@@ -210,6 +271,11 @@ class RegisterView: UIView {
     
     @objc private func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.systemGray4.cgColor
+    }
+    
+    @objc private func togglePasswordVisibility(sender: UIButton) {
+        sender.isSelected.toggle() // Toggle button state
+        passwordTextField.isSecureTextEntry.toggle() // Toggle password visibility
     }
 }
 

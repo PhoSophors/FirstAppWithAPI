@@ -222,8 +222,6 @@ class LoginView: UIView {
         passwordTextField.isSecureTextEntry.toggle() // Toggle password visibility
     }
     
-   
-    
     @objc private func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.systemBlue.cgColor
     }
